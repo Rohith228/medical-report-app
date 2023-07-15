@@ -2,13 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
-const port = 5000; // Update with your desired port
+const port = 5000;
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/test-results", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -19,7 +17,6 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
-// Test Result Model
 const TestResult = mongoose.model("TestResult", {
   totalCholestrol: Number,
   hdlCholestrol: Number,
@@ -28,7 +25,6 @@ const TestResult = mongoose.model("TestResult", {
   triglycerides: Number,
 });
 
-// Report Model
 const Report = mongoose.model("Report", {
   totalCholestrol: Number,
   hdlCholestrol: Number,
@@ -42,7 +38,6 @@ const Report = mongoose.model("Report", {
   },
 });
 
-// API Endpoints
 app.post("/api/test-results", (req, res) => {
   const { totalCholestrol, hdlCholestrol, vldl, ldlCholestrol, triglycerides } =
     req.body;
@@ -58,7 +53,6 @@ app.post("/api/test-results", (req, res) => {
   newTestResult
     .save()
     .then((savedTestResult) => {
-      // Generate the report URL here
       const reportUrl = `http://localhost:5000/api/reports/${savedTestResult._id}`;
       console.log(reportUrl);
 
@@ -69,13 +63,13 @@ app.post("/api/test-results", (req, res) => {
         ldlCholestrol,
         triglycerides,
         reportUrl,
-        testResultId: savedTestResult._id, // Associate the TestResult ID with the Report document
+        testResultId: savedTestResult._id,
       });
 
       newReport
         .save()
         .then(() => {
-          res.json({ reportUrl }); // Send the report URL as JSON response
+          res.json({ reportUrl });
         })
         .catch((error) => {
           res.status(500).send("Error saving report");
@@ -92,7 +86,6 @@ app.get("/api/reports/:id", async (req, res) => {
   const report = await Report.findById(reportId);
   console.log(report);
   res.json(report);
-  //   console.log(report);
 });
 
 app.get("/api/reports", async (req, res) => {
@@ -100,7 +93,6 @@ app.get("/api/reports", async (req, res) => {
   res.json(out);
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
