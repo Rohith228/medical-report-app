@@ -1,0 +1,47 @@
+/* TestResultsForm.css */
+.test-results-form {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.test-results-form h1 {
+  margin-bottom: 20px;
+}
+
+.test-results-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.test-results-form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.test-results-form input[type="text"] {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.test-results-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.click-button {
+  background-color: black;
+  color: white;
+  outline: none;
+  border-style: solid;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.input-field {
+  outline: none;
+}

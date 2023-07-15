@@ -1,0 +1,14 @@
+.report-container {
+  background-color: skyblue;
+  color: darkblue;
+  font-family: "Roboto";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 50%;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: red;
+}
